@@ -26,13 +26,25 @@ def test_incompatible_polym():
 
 
 def test_chop_list():
-    # TO DO
-    pass                
+    assert chop_list([[1,4], [2,3]]) == [[2,3]]
+    assert chop_list([(1,3), (5, 20), (6,12)]) == [(1,3), (6,12)]
+    assert chop_list([(1,3), (5,17), (5,20), (6, 12)]) == [(1,3), (6,12)]
+    assert chop_list([(3,10), (6, 12)]) == [(6,10)]
+    assert chop_list([(3, 8), (3, 10), (5, 17), (5, 20), (6, 12)]) == [(6, 8)]
+    assert chop_list([(2,3), (2, 6), (3, 5), (3, 10), (5, 17), (5, 20), \
+        (6, 12)]) == [(2, 3), (3, 5), (6, 10)]
+    assert chop_list([(1,2), (1,4), (2,3), (2, 6), (3, 5), (3, 10), (5, 17), \
+         (5, 20), (6, 12)]) == [(1,2), (2, 3), (3, 5), (6, 10)]
+
 
 
 def test_find_the_culprit():
     bases1 = ['A','A','a', 'a', 'A', 'A', 'a', 'A', 'a']
     bases2 = ['B','b','b', 'b', 'B', 'b', 'b', 'B', 'B']
     # ('A', 'B') : 3, ('A','b') : 2, ('a','b') : 2, ('B', 'a') : 1
-    # -> 5
+    # -> 8
     assert find_the_culprit(bases1, bases2) == 8
+
+
+
+
