@@ -37,6 +37,9 @@ def test_chop_list():
          (5, 20), (6, 12)]) == [(1,2), (2, 3), (3, 5), (6, 10)]
 
 
+def test_place_mld_breakpoints():
+    assert place_mld_breakpoints([(1,3), (3, 6), (17, 20)]) == [2, 4, 18]
+
 
 def test_find_the_culprit():
     bases1 = ['A','A','a', 'a', 'A', 'A', 'a', 'A', 'a']

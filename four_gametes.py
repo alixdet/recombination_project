@@ -8,6 +8,7 @@ Ref :
 
 from collections import Counter
 
+
 def info_polymorphism(bases :list):
     """
     From a list of at least 4 elements, returns whether the
@@ -75,14 +76,49 @@ def incompatible_polym(alignment :list):
 
     return incomp_polym
 
-    """tests
-    TO DO
-        """
 
 def chop_list(list_pos :list):
     """
-    ...
+    Each pair of incompatible sites (i, j) defines an interval that contains at
+    least one MLD breakpoint. To place the MLD breakpoint, we seek the shortest
+    interval that is sufficient to explain the incompatibilities.
+
+    ! : "We retrieve all intervals and sort them in increasing order of site
+    positions along the genome" -> DONE by constructing, verified nowhere
     """
+    curr = list_pos[-1]
+
+    for interval in list_pos[::-1][1:]:
+        # the current interval is contained in the other one
+        if curr[0] >= interval[0] and curr[0] < interval[1] and \
+            curr[1] <= interval[1] :
+            list_pos.remove(interval)    
+
+        # overlap
+        elif curr[0] >= interval[0] and curr[0] < interval[1] and \
+            curr[1] >= interval[1]:
+            list_pos.remove(curr)
+            list_pos.remove(interval)
+            new_interv = (curr[0], interval[1])
+            curr = new_interv
+            list_pos.append(new_interv)
+
+        else : # move on
+            curr = interval
+
+    return(list_pos)
+
+def place_mld_breakpoints(incompt_pos :list):
+    """
+    Adds an MLD breakpoint in the middle of an incompatible interval
+
+    Parameters :
+        incompt_pos (list) : chop_list() output
+    
+    Output :
+        list : indexes of MLD breakpoints in the sequence
+    """
+    return [int(inter[0] + (inter[1] - inter[0])/2) for inter in incompt_pos]
 
 
 def find_the_culprit(bases1 :list, bases2 :list):
