@@ -30,10 +30,6 @@ def info_polymorphism(bases :list):
 
     return len(values) >= 2 and 1 not in values
 
-    """tests (add unitary tests)
-    info_polymorphism(['A', 'A', 'a', 'A', 'a']) -> True
-    info_polymorphism(['B', 'B', 'B', 'b', 'B']) -> False
-    """
 
 def polym_positions(alignment :list):
     len_alignment = len(alignment[0])
@@ -48,14 +44,6 @@ def polym_positions(alignment :list):
 
     return polym_positions
 
-    """tests
-    test_pos_polym = ['ABCDEF',
-                    'aBcDeF',
-                    'abcdeF',
-                    'ABcdEF',
-                    'ABCdEF']
-        -> [0, 2, 3, 4]
-    """
 
 def four_gametes_test(bases1 :list, bases2 :list):
     """
@@ -71,15 +59,6 @@ def four_gametes_test(bases1 :list, bases2 :list):
 
     return(len(set(c)) > 3)
 
-    """tests
-    bases1 = ['A','A','a', 'a', 'A', 'A']
-    bases2 = ['B','b','b', 'b', 'B', 'b']
-    -> True
-
-    bases1 = ['A','A','a', 'a', 'A', 'A','a']
-    bases2 = ['B','b','b', 'b', 'B', 'b', 'B']
-    -> False
-    """
 
 def incompatible_polym(alignment :list):
     """
@@ -91,14 +70,14 @@ def incompatible_polym(alignment :list):
     for i in range(len(polym_pos)):
         for j in range(len(polym_pos[i:])):
             if four_gametes_test([seq[i] for seq in alignment],
-                                 [seq[j] for seq in alignment]):
+                                [seq[j] for seq in alignment]):
                 incomp_polym.append((i,j))
 
     return incomp_polym
 
     """tests
     TO DO
-    """
+        """
 
 def chop_list(list_pos :list):
     """
@@ -125,21 +104,14 @@ def find_the_culprit(bases1 :list, bases2 :list):
     if len(set(comb)) == 4 :
         min_occ = min([len(values) for values in comb.values()])
         min_values = [v for v in comb.values() if len(v) == min_occ][0]
-        return min_values
+        return min_values[0]
         
     return False # not sure what to return
 
-    """
-    bases1 = ['A','A','a', 'a', 'A', 'A', 'a', 'A', 'a']
-    bases2 = ['B','b','b', 'b', 'B', 'b', 'b', 'B', 'B']
 
-    ('A', 'B') : 3, ('A','b') : 2, ('a','b') : 2, ('B', 'a') : 1
-    -> 5
+def longuest_compat_chunk_notime(tot_alignment :list, start_pos :int):
     """
-
-def longest_compat_chunk_notime(tot_alignment :list, start_pos :int):
-    """
-    DOESNT CONSIDER THE TIME
+    DOES NOT CONSIDER THE TIME
 
     Resize each time sequences are incompatible
 
@@ -177,7 +149,7 @@ def longest_compat_chunk_notime(tot_alignment :list, start_pos :int):
     ### TO TEST !
 
 
-def longest_compat_recent_bloc(tot_alignment :list, start_pos :int):
+def longuest_compat_recent_bloc(tot_alignment :list, start_pos :int):
     """
     Resize each time sequences are incompatible
 
