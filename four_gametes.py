@@ -11,18 +11,17 @@ from collections import Counter
 
 def info_polymorphism(bases :list):
     """
-    From a list of at least 4 elements, returns whether the
-    polymorphism is informative
-    i.e. 2 alleles at least twice
+    Returns whether the polymorphism is informative,
+    i.e. 2 alleles at least twice.
 
-    ex, on a given locus :
-        - A A a A a -> True
-        - B B B B b -> False
+    Parameters: 
+            bases (list): 4 or more bases
+
+    Returns:
+            boolean: polymorphism is informative
     
-    ! : consider case of random mutation on informative polymorphism
+    TODO: consider case of random mutation on informative polymorphism
         when # seq >= 5
-
-    if remains that simple, delete function and insert code instead
     """
     assert len(bases) >= 4, "4 or more elments required"
 
@@ -31,16 +30,21 @@ def info_polymorphism(bases :list):
 
     return len(values) >= 2 and 1 not in values
 
-
 def polym_positions(alignment :list):
-    len_alignment = len(alignment[0])
-    for seq in alignment[1:]:
-        assert len(seq) == len_alignment, "Sequences of different sizes"
-    
+    """
+    Looks for informative polymorphism on an alignment, # seq >= 4.
+    Calls info_polymorphism().
+
+        Parameters:
+            alignment (list): list of bases
+        
+        Output :
+            list: positions of informative polymorphisms
+    """
     polym_positions = []
 
-    for i in range(len_alignment):
-        if info_polymorphism([seq[i] for seq in alignment]):
+    for i in range(len(alignment)):
+        if info_polymorphism(alignment[i]):
             polym_positions.append(i)
 
     return polym_positions
@@ -48,11 +52,17 @@ def polym_positions(alignment :list):
 
 def four_gametes_test(bases1 :list, bases2 :list):
     """
-    4-gametes test on 2 informative polymorphisms loci
+    Whether 2 loci are incompatible by computing a 4-gametes
+    test on 2 informative polymorphisms.
 
-    Returns True if 2 loci are incompatible, else False
+        Parameters:
+            bases1 (list)
+            bases2 (list)
+        
+        Output:
+            boolean: the 2 loci are incompatible
     """
-    assert len(bases1) == len(bases2)
+    assert len(bases1) == len(bases2), "Not the same number of elements."
 
     c = []
     for i in range(len(bases1)):
@@ -63,15 +73,20 @@ def four_gametes_test(bases1 :list, bases2 :list):
 
 def incompatible_polym(alignment :list):
     """
-    Return list of pairwise incompatible polymorphisms
+    From an alignment, returns a list of pairwise incompatible polymorphisms.
+    Calls polym_positions() and four_gametes_test().
+
+        Parameters:
+            alignment (list of lists)
+        Output:
+            list of tuples: positions of incompatiblities    
     """
     incomp_polym = []
     polym_pos = polym_positions(alignment)
 
     for i in range(len(polym_pos)):
-        for j in range(len(polym_pos[i:])):
-            if four_gametes_test([seq[i] for seq in alignment],
-                                [seq[j] for seq in alignment]):
+        for j in range(i, len(polym_pos)):
+            if four_gametes_test(alignment[i], alignment[j]):
                 incomp_polym.append((i,j))
 
     return incomp_polym
