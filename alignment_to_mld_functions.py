@@ -85,9 +85,11 @@ def incompatible_polym(alignment :list):
     polym_pos = polym_positions(alignment)
 
     for i in range(len(polym_pos)):
+        first_ind = polym_pos[i]
         for j in range(i, len(polym_pos)):
-            if four_gametes_test(alignment[i], alignment[j]):
-                incomp_polym.append((i,j))
+            second_ind = polym_pos[j]
+            if four_gametes_test(alignment[first_ind], alignment[second_ind]):
+                incomp_polym.append((first_ind, second_ind))
 
     return incomp_polym
 
@@ -153,4 +155,3 @@ def mld_length_distrib(mld_pos :list):
     Requires matplotlib.pyplot.
     """
     #TODO
-
