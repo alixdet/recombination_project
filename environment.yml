@@ -1,0 +1,9 @@
+name: detect_subtrees
+channels:
+    - defaults
+    - bioconda
+    - conda-forge
+dependencies:
+    - python=3.9
+    - matplotlib=3.5
+    - msprime=1.0.2 
