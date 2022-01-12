@@ -1,9 +1,10 @@
-name: detect_subtrees
+name: mld_recent_subtrees
 channels:
     - defaults
     - bioconda
     - conda-forge
 dependencies:
     - python=3.9
+    - biopython=1.79
     - matplotlib=3.5
-    - msprime=1.0.2 
+    - msprime=1.0.2
