@@ -19,12 +19,14 @@ $ conda activate recombination_projet
 ```
 
 ## Run
-The program requires as input a directory containing sequences aligned in fasta files. The files need to be in standard fasta format, the first line starting with '>' followed by the sequenced ID, and the sequences on 60 characters-long lines.
+The program requires as input an sequence alignment in a single fasta file.
 
 It can then be run with the command in the terminal:
 ```
-$ python3 main_alignment_to_mld.py -d /dir_with_files/
+$ python3 main_aln_to_polym-ratio.py -a aln/aln_100k.fa -s 0 -e 1000
 ```
+It takes as argument the path to the file (-a), the start (-s) and the end (-e) positions on the alignment.
+The output is the distribution of the ratio of polymorphic sites within MLD blocks.
 
 
 
