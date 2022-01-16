@@ -8,3 +8,4 @@ dependencies:
     - biopython=1.79
     - matplotlib=3.5
     - msprime=1.0.2
+    - tqdm=4.62
