@@ -1,8 +1,7 @@
 # Recombination project
 
-Master 2 Bio-informatics, Université de Paris & SMILE unit, Collège de France
+Master 2 Bio-informatics, Université de Paris & *Stochastic Modelisation for the Inference of Life Evolution unit*, Collège de France
 
-1 month project under the supervision of Thomas Forest, Guillaume Achaz & Amaury Lambert.
 
 Reference :
 Testing for population decline using maximal linkage disequilibrium blocks, Kerdoncuff, Lambert & Achaz, *Theoretical Population Biology*, 2020
@@ -14,9 +13,9 @@ This project aims to continue the work conducted by the lab on population dynami
 ## Installation
 Consider installing the requirements with *conda* from the main directory:
 ```
-$ cd mld_recent_subtrees
+$ cd recombination_projet
 $ conda env create -f environment.yml
-$ conda activate mld_recent_subtrees
+$ conda activate recombination_projet
 ```
 
 ## Run

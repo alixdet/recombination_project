@@ -71,18 +71,20 @@ def four_gametes_test(bases1 :list, bases2 :list):
     return(len(set(c)) > 3)
 
 
-def incompatible_polym(alignment :list):
+def incompatible_polym(alignment :list,
+                       polym_pos :list):
     """
     From an alignment, returns a list of pairwise incompatible polymorphisms.
     Calls polym_positions() and four_gametes_test().
 
         Parameters:
             alignment (list of lists)
+            polym_pos (list): polym_positions() output  
         Output:
             list of tuples: positions of incompatiblities    
     """
     incomp_polym = []
-    polym_pos = polym_positions(alignment)
+    #polym_pos = polym_positions(alignment)
 
     for i in range(len(polym_pos)):
         first_ind = polym_pos[i]
